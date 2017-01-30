@@ -7,7 +7,7 @@ struct ListNode
 	ListNode *next;
 	ListNode(int x):val(x),next(NULL){}
 };
-int getLength(ListNode* head)
+int getLength(ListNode* head)//得到Linkedlist的长度
 {
 	if (head)
 	{
@@ -73,6 +73,7 @@ int getNthNode(ListNode* head,int index)
 	cout<<"index too big or too small"<<endl;
 	return 0;
 }
+//删掉倒数第N个的Node
 ListNode* removeNthFromEnd(ListNode* head, int n)
 {
 	int len = getLength(head);
@@ -80,7 +81,7 @@ ListNode* removeNthFromEnd(ListNode* head, int n)
 	{
 		return head;
 	}
-	else if (len==1)
+	else if (len==1)//要考虑极端情况，如果只有一个Node，就return NULL
 	{
 		return NULL;
 	}
@@ -115,7 +116,7 @@ ListNode* removeNthFromEnd(ListNode* head, int n)
 			return head;
 		}
 		else//n==len,means we want to delete the head
-		{
+		{//first Node很难删除，我就把1st Node赋上2nd Node的值，然后删掉2nd Node
 			ListNode* p2;
 			p2 = head->next;
 			head->val = p2->val;
