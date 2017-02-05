@@ -8,6 +8,7 @@ struct ListNode
 	ListNode *next;
 	ListNode(int x):val(x),next(NULL){}
 };
+//print是调试时使用的
 void printLinkedList(ListNode* head)
 {
 	ListNode* p = head;
@@ -25,7 +26,9 @@ void printLinkedList(ListNode* head)
 		}
 	}
 }
-ListNode* swapinPair(ListNode* head)
+//用来解24题的function
+//假设我们的LinkedList是20->15->10->5->0
+ListNode* swapinPair(ListNode* head)//24题：不能改变node里的值，而且只能用constant的space//然后，使用recursion不是用的constant space
 {
 	if(!head) {return NULL;}
 	ListNode* p = head->next;
@@ -36,12 +39,12 @@ ListNode* swapinPair(ListNode* head)
 		head->next  = NULL;
 		return p;
 	}
-	else
+	else//之前的recursion得到了segmentation fault因为传参不对。我是先把p->next改成指向前面的Node，然后又把p->next传进recursion	
 	{
 		head->next = swapinPair(p->next);
 		p->next = head;
 		return p;
-	}
+	}//正确的做法是先把p->next传进去，这样后面那一大块，就可以在recursion中计算
 }
 int main()
 {
